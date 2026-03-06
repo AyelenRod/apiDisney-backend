@@ -1,9 +1,10 @@
 //Logica y mapeo
 const getItems = async (req, res) => {
   try {
-    const response = await fetch('https://api.disneyapi.dev/character');
+    const apiUrl = process.env.EXTERNAL_API_URL || 'https://api.disneyapi.dev/character';
+    const response = await fetch(apiUrl);
     const result = await response.json();
-    
+
     const transformed = result.data.map((char) => ({
       id: char._id,
       title: char.name,
